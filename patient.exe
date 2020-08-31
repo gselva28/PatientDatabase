@@ -1,0 +1,123 @@
+> use patient
+switched to db patient
+> db.patientData.insertOne({firstName: "Selvakumar", lastName: "G", age: 20, "history": [{disease: "cold", treatment: "DX350"}]})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5f4d133c581a7a41e247bd85")
+}
+> db.patientData.find().pretty()
+{
+        "_id" : ObjectId("5f4d133c581a7a41e247bd85"),
+        "firstName" : "Selvakumar",
+        "lastName" : "G",
+        "age" : 20,
+        "history" : [
+                {
+                        "disease" : "cold",
+                        "treatment" : "DX350"
+                }
+        ]
+}
+> db.patientData.insertOne({firstName: "Ganeshkumar", lastName: "MA", age: 21, "history": [{disease: "cold", treatment: "DX350"}]})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5f4d13b1581a7a41e247bd86")
+}
+> db.patientData.insertOne({firstName: "Gopinath", lastName: "K", age: 21, "history": [{disease: "stomach ache", treatment: "DX350"}]})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5f4d13d2581a7a41e247bd87")
+}
+> db.patientData.find().pretty()
+{
+        "_id" : ObjectId("5f4d133c581a7a41e247bd85"),
+        "firstName" : "Selvakumar",
+        "lastName" : "G",
+        "age" : 20,
+        "history" : [
+                {
+                        "disease" : "cold",
+                        "treatment" : "DX350"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5f4d13b1581a7a41e247bd86"),
+        "firstName" : "Ganeshkumar",
+        "lastName" : "MA",
+        "age" : 21,
+        "history" : [
+                {
+                        "disease" : "cold",
+                        "treatment" : "DX350"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5f4d13d2581a7a41e247bd87"),
+        "firstName" : "Gopinath",
+        "lastName" : "K",
+        "age" : 21,
+        "history" : [
+                {
+                        "disease" : "stomach ache",
+                        "treatment" : "DX350"
+                }
+        ]
+}
+
+> db.patientData.updateMany({firstName: "Gopinath"}, {$set: {age: 22, lastName: "k", history: [{disease: "fever"}]}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.patientData.find().pretty()
+{
+        "_id" : ObjectId("5f4d133c581a7a41e247bd85"),
+        "firstName" : "Selvakumar",
+        "lastName" : "G",
+        "age" : 20,
+        "history" : [
+                {
+                        "disease" : "cold",
+                        "treatment" : "DX350"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5f4d13b1581a7a41e247bd86"),
+        "firstName" : "Ganeshkumar",
+        "lastName" : "MA",
+        "age" : 21,
+        "history" : [
+                {
+                        "disease" : "cold",
+                        "treatment" : "DX350"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5f4d13d2581a7a41e247bd87"),
+        "firstName" : "Gopinath",
+        "lastName" : "k",
+        "age" : 22,
+        "history" : [
+                {
+                        "disease" : "fever"
+                }
+        ]
+}
+> db.patientData.find({age: {$gt: 30}}).pretty()
+
+> db.patientData.deleteMany({"history.disease" : "cold"})
+{ "acknowledged" : true, "deletedCount" : 2 }
+> db.patientData.find().pretty()
+{
+        "_id" : ObjectId("5f4d13d2581a7a41e247bd87"),
+        "firstName" : "Gopinath",
+        "lastName" : "k",
+        "age" : 22,
+        "history" : [
+                {
+                        "disease" : "fever"
+                }
+        ]
+}
+>
